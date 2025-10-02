@@ -1,0 +1,348 @@
+@charset "UTF-8";
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-size: 16px;
+  margin: 0;
+  color: #fcf743; /* Sass 변수 대신 실제 값으로 */
+  position: relative;
+  overflow: hidden;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0; /* top:0; right:0; bottom:0; left:0; */
+  background-image: url("/assets/paradise.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  transform: scale(1.1);
+  filter: blur(45px) brightness(1.75);
+  z-index: -1;
+}
+
+.container {
+  margin: 48px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-areas: "title title title lang" "learn ta    ta    ta" "learn act   act   act";
+}
+.container .titleBox {
+  grid-area: title;
+  border: 5px solid #fcf743;
+  border-radius: 24px;
+  padding: 16px;
+  margin-bottom: -5px;
+  height: 16vh;
+}
+.container .titleBox .title {
+  font-weight: 700;
+  color: #fcf743;
+  font-size: 36px;
+}
+.container .titleBox .sub {
+  margin-top: 24px;
+  font-size: 20px;
+}
+.container .custom-select {
+  grid-area: lang;
+  border: 5px solid #fcf743;
+  border-radius: 24px;
+  margin-left: -5px;
+  margin-bottom: -5px;
+  padding: 12px;
+  position: relative;
+  display: inline-block;
+}
+.container .custom-select label {
+  margin-right: 10px;
+  font-size: 20px;
+}
+.container .custom-select__trigger {
+  width: 100%;
+  border: 3px solid #fcf743;
+  border-radius: 12px;
+  color: #fcf743;
+  background-color: unset;
+  cursor: pointer;
+  text-align: left;
+}
+.container .custom-select__trigger:focus {
+  outline: none;
+  box-shadow: none;
+}
+.container .custom-select button {
+  margin-top: 8px;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 700;
+}
+.container .custom-select button:hover {
+  background-color: #fcf743;
+  color: #757575;
+}
+.container .custom-select .custom-options {
+  list-style: none;
+  margin-top: -3px;
+  padding: 0;
+  border-radius: 12px;
+  border: 3px solid #fcf743;
+  z-index: 1000;
+}
+.container .custom-select .custom-options li {
+  padding: 10px 12px;
+  cursor: pointer;
+  color: #fcf743;
+}
+.container .custom-select .custom-options li:hover {
+  background-color: #fcf743;
+  color: #757575;
+}
+
+.wrtBox {
+  grid-area: ta;
+  padding: 12px;
+  border-radius: 24px;
+  background: #fcf743;
+}
+.wrtBox textarea {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: #757575;
+  spellcheck: false;
+  -webkit-user-modify: read-write-plaintext-only;
+  border: none;
+  background: none;
+  line-height: 1.6;
+  outline: none;
+  resize: none;
+  min-height: 55vh;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 700;
+}
+.wrtBox textarea:focus {
+  border-color: #757575;
+}
+.wrtBox textarea:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+.wrtBox textarea::placeholder {
+  opacity: 70%;
+}
+
+.actions {
+  grid-area: act;
+  margin-top: -5px;
+  display: flex;
+  align-items: center;
+  min-height: 10vh;
+}
+.actions .btn.copy, .actions .btn.clear {
+  background-color: unset;
+  color: #fcf743;
+  font-size: 20px;
+  border: 5px solid #fcf743;
+  border-radius: 24px;
+  padding: 0 24px;
+  cursor: pointer;
+  height: 100%;
+}
+.actions .btn.copy:disabled, .actions .btn.clear:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.actions .btn.copy:hover:not(:disabled), .actions .btn.clear:hover:not(:disabled) {
+  filter: brightness(1.05);
+  background: #fcf743;
+  color: #757575;
+}
+.actions .btn.copy:active:not(:disabled), .actions .btn.clear:active:not(:disabled) {
+  transform: translateY(1px);
+}
+.actions .btn.copy {
+  margin-left: -5px;
+}
+.actions .copy-toast {
+  font-size: 13px;
+  color: #fcf743;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+.actions .copy-toast.show {
+  opacity: 1;
+  color: #fcf743;
+}
+
+.learn {
+  grid-area: learn;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  border: 5px solid #fcf743;
+  border-radius: 24px;
+  min-height: 70vh;
+  margin-right: -5px;
+}
+.learn .learn-panel {
+  max-height: 60vh;
+  overflow: auto;
+  padding-right: 12px;
+}
+.learn .learn-panel::-webkit-scrollbar {
+  width: 8px;
+}
+.learn .learn-panel::-webkit-scrollbar-track {
+  background: transparent;
+}
+.learn .learn-panel::-webkit-scrollbar-thumb {
+  background: #fcf743;
+  border-radius: 4px;
+}
+.learn .learn-panel {
+  scrollbar-width: thin;
+  scrollbar-color: #fcf743 transparent;
+}
+
+.btn.learn-toggle {
+  background: none;
+  color: #fcf743;
+  padding: 12px;
+  font-size: 20px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+}
+.btn.learn-toggle::after {
+  content: "▾";
+  font-size: 12px;
+  opacity: 0.8;
+}
+.btn.learn-toggle[aria-expanded=true]::after {
+  content: "▴";
+}
+.btn.learn-toggle:hover {
+  border-color: #fff;
+}
+.btn.learn-toggle:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.learn-panel {
+  padding: 0 12px;
+  overflow: hidden;
+  transition: grid-template-rows 0.18s ease, padding 0.18s ease, opacity 0.18s ease;
+  display: grid;
+  grid-template-rows: 0fr; /* 닫힘 */
+  opacity: 0;
+}
+.learn-panel.open {
+  grid-template-rows: 1fr; /* 열림 */
+  padding: 0 12px;
+  opacity: 1;
+}
+.learn-panel .learn-hint {
+  margin: 0 0 8px 0;
+  color: #fcf743;
+}
+.learn-panel .learn-list {
+  margin: 0;
+  line-height: 1.7;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(252, 247, 67, 0.48);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease-out;
+  z-index: 9998;
+}
+.overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease-out, transform 0.18s ease-out;
+  z-index: 9999;
+  transform: translateY(8px);
+}
+.modal.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.modal .modal__panel {
+  position: relative;
+  overflow: hidden;
+  color: #fcf743;
+  border-radius: 12px;
+  padding: 18px 20px;
+  width: min(560px, 92vw);
+  z-index: 0;
+}
+.modal .modal__panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/assets/paradise.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: scale(1.1);
+  filter: blur(45px) brightness(1.75);
+  z-index: -1;
+  pointer-events: none;
+  border-radius: inherit;
+}
+.modal .modal__panel > * {
+  position: relative;
+  z-index: 1;
+}
+.modal .modal__msg {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+.modal .modal__actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+.modal .btn {
+  border: 0;
+  border-radius: 12px;
+  border: 3px solid #fcf743;
+  padding: 12px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+}
+.modal .btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+.modal .btn.yes {
+  background: none;
+  color: #fcf743;
+}
+.modal .btn.no {
+  background: none;
+  color: #fcf743;
+}
+.modal .btn:hover {
+  background-color: #fcf743;
+  color: #757575;
+}
+
+/*# sourceMappingURL=replace-suggest.css.map */

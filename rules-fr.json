@@ -1,0 +1,253 @@
+{
+  "ui-text": {
+    "title": "Anti-In-tapable",
+    "subtitle": "Écrivez votre texte ici. Je vous proposerai et corrigerai les symboles nécessaires :)",
+    "langChoice": "Sélectionnez la langue: ",
+    "example": "Ex.: En réalité, vous vouliez écrire 3 × 6 = 18 et non 3x6=18.",
+    "proposition": "Proposition: ",
+    "yes": "Oui",
+    "no": "Non",
+    "copy": "Copier dans le presse-papiers",
+    "success": "Copié !",
+    "clear": "Tout effacer",
+    "learn-more": "Savoir plus",
+    "hint": "Ce projet vous aide à saisir correctement des symboles souvent mal utilisés à cause des limites d’un clavier standard. Les règles s’adaptent selon la langue choisie et couvrent notamment\u202f:",
+    "hint-list":[
+      "×", "°", "™", "©", "®", 
+      "- – —", 
+      ". … ·",
+      "' ‘ ’ ′ `", "“ ” ″ \"", 
+      "《 》", "『 』", "« »",
+      "≠", "≤ ≥", 
+      "⇐ ⇒ ⇔", "← →",
+      "‖ ∥ 𝄆 𝄇",
+      "1ˢᵗ 2ⁿᵈ 3ʳᵈ nᵗʰ", 
+      "H₂O 2² SO₄²⁻",
+      "espace fine insécable", 
+      "Œ Æ œ æ",
+      "♡ ♥",
+      "* † ‡ §",
+      "※", 
+      "□" ],
+      "choicePrompt": "Veuillez choisir une option ci-dessous.",
+      "replacePrompt": "Souhaitez-vous remplacer ce passage\u202f?"
+  },
+  "espacement": [
+    {
+      "id": "ponctuation-fine-before",
+      "chars": [
+        "?", "!", ":", ";", "»", "%", "°", "€"],
+      "template": "espace_fine_before",
+      "message": "inserer un espace fine insecable\u202f?"
+    },
+    {
+      "id": "ponctuation-fine-after", 
+      "chars": ["«", "₩"],
+      "template": "espace_fine_after",
+      "message": "inserer un espace fine insecable\u202f?"
+    }
+  ],
+  "replacement": [
+    {
+      "id": "oe-ligature",
+      "match": ["oe"],
+      "replace": "œ",
+      "message": "ligature œ(cœur)\u202f?"
+    },
+    {
+      "id": "ae-ligature",
+      "match": ["ae"],
+      "replace": "æ",
+      "message": "ligature æ(encyclopædia)\u202f?"
+    },
+    {
+      "id": "oe-ligature",
+      "match": ["OE"],
+      "replace": "Œ",
+      "message": "ligature Œ(cœur)\u202f?"
+    },
+    {
+      "id": "ae-ligature",
+      "match": ["AE"],
+      "replace": "Æ",
+      "message": "ligature Æ(encyclopædia)\u202f?"
+    },
+     {
+      "id": "ae-ligature",
+      "match": ["art.", "part."],
+      "replace": "§",
+      "message": "paragraph signe §\u202f?"
+    },
+    {
+      "id": "multiplication",
+      "match": ["(\\d)[xX]", "(\\d) [xX]"],
+      "replace": "$1\u202F×\u202F",
+      "message": "x pour multiplication\u202f?"
+    },
+    { "id": "degre",
+      "match": ["(\\d)[oO]", "(\\d) [oO]"],
+      "replace": "$1°", 
+      "message": "symbole degré\u202f?" 
+    },
+    {
+      "id": "copyright",
+      "match": ["\\(c\\)","\\(C\\)"],
+      "replace": "©",
+      "message": "symbole copyright\u202f?"
+    },
+    {
+      "id": "trademark", 
+      "match": ["\\(tm\\)","\\(TM\\)"],
+      "replace": "™",
+      "message": "symbole trademark\u202f?"
+    },
+    {
+      "id": "registered",
+      "match": ["\\(r\\)","\\(R\\)"],
+      "replace": "®", 
+      "message": "symbole registered\u202f?"
+    },
+    {
+      "id": "guillemet-ouvrant",
+      "match": ["<<"],
+      "replace": "«\u202F",
+      "message": "guillemet ouvrant\u202f?"
+    },
+    {
+      "id": "guillemet-fermant",
+      "match": [">>"],
+      "replace": "\u202F»",
+      "message": "guillemet fermant\u202f?"
+    },
+    {
+      "id": "points-suspension",
+      "match": ["\\.\\.\\.", "\\. \\. \\."],
+      "replace": "…",
+      "message": "points de suspension\u202f?"
+    },
+    {
+      "id": "not-equal",
+      "match": ["!="],
+      "replace": "≠",
+      "message": "signe 'différent de'(≠)\u202f?"
+    },
+    {
+      "id": "superscript-power",
+      "match": ["\\^\\d+"],
+      "transform": "digitsToSuper",
+      "message": "indice supérieur (2²)\u202f?"
+    },
+    { 
+      "id": "chem-sub", 
+      "match": ["(?:[A-Z][a-z]?|\\)|\\]|\\})\\d+$"],
+      "message": "les chiffres des formules chimiques en indices (H₂O)\u202f?", 
+      "transform": "digitsToSub" 
+    },
+    { 
+      "id": "chem-charge", 
+      "match": ["\\^?\\d*[\\+\\-]$"],
+      "message": "la notation de charge en exposant (SO₄²⁻)\u202f?", 
+      "transform": "chargeToSuper" 
+    }
+  ],
+  "choices": [
+    {
+      "id": "tiret",
+      "match": ["-","–","—"],
+      "displayMatch": "-",
+      "choices": [
+        { "label": "pour relier deux mots (c'est-à-dire)\u202f?", "replace": "-" },
+        { "label": "pour indiquer un intervalle / une relation (25\u00a0–\u00a030\u202fmm)\u202f?", "replace": "\u00a0–\u00a0" },
+        { "label": "pour écrire les dialogues (—\u00a0Bonjour\u202f!)\u202f?", "replace": "—\u00a0" },
+        { "label": "pour écrire les nombres négatifs (−30\u00a0°C)\u202f?", "replace": "−" }
+      ]
+    },
+    {
+      "id": "prime",
+      "match": ["'"],
+      "displayMatch": "'",
+      "choices": [
+        { "label": "pour commencer un dialogue(‘Toi.’)\u202f?", "replace": "‘" },
+        { "label": "pour finir un dialogue(‘Toi.’)\u202f?", "replace": "’" },
+        { "label": "pour écrire les minutes/degrés(1h30′45″)\u202f?", "replace": "′" },
+        { "label": "pour l'élision (d'eau)\u202f?", "replace": "'" },
+        { "label": "pour une quote simple en programmation\u202f?", "replace": "'" },
+        { "label": "pour un backtick en programmation\u202f?", "replace": "`"}
+      ]
+    },
+    {
+      "id": "prime2",
+      "match": ["\""],
+      "displayMatch": "'",
+      "choices": [
+        { "label": "pour commencer une dialogue(«\u202fToi.\u202f»)\u202f?", "replace": "«\u202f" },
+        { "label": "pour finir une dialogue(«\u202fToi.\u202f»)\u202f?", "replace": "\u202f»" },
+        { "label": "pour écrire la seconde ou la degree(1h30′45″)\u202f?", "replace": "″" },
+        { "label": "pour une quote double en programmation?", "replace": "\"" }
+      ]
+    },
+    {
+      "id": "heart",
+      "match": ["<3"],
+      "displayMatch": "<3",
+      "choices": [
+        { "label": "literalement <3\u202f?", "replace": "<3" },
+        { "label": "pour un cœur vide\u202f?", "replace": "♡" },
+        { "label": "pour un cœur noir\u202f?", "replace": "♥" }
+      ]
+    },
+    {
+      "id": "double-arrow-right",
+      "match": ["=>"],
+      "displayMatch": "=>",
+      "choices": [
+        { "label": "literalement =>\u202f?", "replace": "=>" },
+        { "label": "pour une flèche double à droite\u202f?", "replace": "⇒" },
+        { "label": "pour supérieur ou égal\u202f?", "replace": "≥" }
+      ]
+    },
+    {
+      "id": "double-arrow-left",
+      "match": ["<="],
+      "displayMatch": "<=",
+      "choices": [
+        { "label": "literalement <=\u202f?", "replace": "<=" },
+        { "label": "pour une flèche double à gauche\u202f?", "replace": "⇐" },
+        { "label": "pour une flèche quivalence\u202f?", "replace": "⇔" },
+        { "label": "pour inférieur ou égal\u202f?", "replace": "≤" }
+      ]
+    },
+    {
+      "id": "arrow-right",
+      "match": ["->"],
+      "displayMatch": "->",
+      "choices": [
+        { "label": "literalement ->\u202f?", "replace": "->" },
+        { "label": "pour une flèche à droite\u202f?", "replace": "→" },
+        { "label": "pour supérieur ou égal\u202f?", "replace": "≥" }
+      ]
+    },
+    {
+      "id": "arrow-left",
+      "match": ["<-"],
+      "displayMatch": "<-",
+      "choices": [
+        { "label": "literalement <-\u202f?", "replace": "<-" },
+        { "label": "pour une flèche à gauche\u202f?", "replace": "←" },
+        { "label": "pour inférieur ou égal\u202f?", "replace": "≤" }
+      ]
+    },
+    {
+      "id": "double-bar",
+      "match": ["\\|\\|"],
+      "displayMatch": "||",
+      "choices": [
+        { "label": "literalement ||\u202f?", "replace": "||" },
+        { "label": "pour une double barre verticale\u202f?", "replace": "‖" },
+        { "label": "pour un signe de parallèle en math\u202f?", "replace": "∥" },
+        { "label": "pour un signe de reprise musicale(𝄆)\u202f?", "replace": "𝄆" },
+        { "label": "pour un signe de reprise musicale(𝄇)\u202f?", "replace": "𝄇" }
+      ]
+    }
+  ]
+}

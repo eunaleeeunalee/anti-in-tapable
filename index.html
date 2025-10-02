@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title></title>
+  <link rel="stylesheet" href="replace-suggest.css">
+</head>
+<body>
+  
+
+  <div class="container">
+    <div class="titleBox">
+      <div class="title"></div>
+      <p class="sub"></p>
+    </div>
+    
+    <div class="custom-select">
+      <label class="langChoice"></label>
+      <button type="button" class="custom-select__trigger" data-value="en">English / Anglais / 영어 ▾</button>
+      <ul class="custom-options" hidden>
+        <li data-value="fr">French / Français / 프랑스어</li>
+        <li data-value="en">English / Anglais / 영어</li>
+        <li data-value="ko">Korean / Coréen / 한국어</li>
+      </ul>
+      <input type="hidden" name="language" id="language" value="">
+    </div>
+
+    <section class="learn">
+      <button id="learn-toggle"
+              class="btn learn-toggle"
+              type="button"
+              aria-expanded="false"
+              aria-controls="learn-panel">
+      </button>
+
+      <div id="learn-panel" class="learn-panel" hidden>
+        <p class="learn-hint"></p>
+        <ul class="learn-list"></ul>
+      </div>
+    </section>
+
+    <div class="wrtBox">
+      <textarea spellcheck="false" id="box" placeholder=""></textarea>
+    </div>
+
+    <div class="actions">
+      <button id="clear-btn" class="btn clear" type="button"></button>
+      <button id="copy-btn" class="btn copy" type="button" aria-label="복사하기">복사</button>
+      <span id="copy-toast" class="copy-toast" aria-live="polite" hidden>복사됨!</span>
+    </div>
+  </div>
+
+  <!-- 딤드 오버레이 -->
+  <div id="overlay" class="overlay" aria-hidden="true"></div>
+
+  <!-- 모달 -->
+  <div id="proposal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal__panel" role="document">
+      <div class="modal__msg proposal__msg"></div>
+      <div class="modal__actions proposal__actions" id="proposal-actions"></div>
+    </div>
+  </div>
+
+  <script src="js/replace-suggest.js" defer></script>
+</body>
+</html>

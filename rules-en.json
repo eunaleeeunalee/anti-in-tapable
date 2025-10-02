@@ -1,0 +1,231 @@
+{
+  "ui-text": {
+    "title": "Anti-In-tapable — Can’t Type Blocker",
+    "subtitle": "Type your text here. I’ll suggest and correct the symbols you need :)!",
+    "langChoice": "Choose your language: ",
+    "example": "Ex: You actually wanted to write 3×6=18, not 3x6=18.",
+    "proposition": "Proposition: ",
+    "yes": "Yes",
+    "no": "No",
+    "copy": "Copy to clipboard",
+    "success": "Copied!",
+    "clear": "Clear all text",
+    "learn-more": "Learn more",
+    "hint": "This project helps you type symbols that are often misused due to the limitations of a standard keyboard. The applied rules change depending on the selected language, and cover symbols such as:",
+    "hint-list":[
+      "×", "°", "™", "©", "®", 
+      "- – —", 
+      ". … ·",
+      "' ‘ ’ ′ `", "“ ” ″ \"", 
+      "《 》", "『 』", "« »",
+      "≠", "≤ ≥", 
+      "⇐ ⇒ ⇔", "← →",
+      "‖ ∥ 𝄆 𝄇",
+      "1ˢᵗ 2ⁿᵈ 3ʳᵈ nᵗʰ", 
+      "H₂O 2² SO₄²⁻",
+      "narrow non-breaking space", 
+      "Œ Æ œ æ",
+      "♡ ♥",
+      "* † ‡ §",
+      "※", 
+      "□" ],
+      "choicePrompt": "Please choose one of the following.",
+      "replacePrompt": "Do you want to replace this part?"
+  },
+  "replacement": [
+    {
+      "id": "ordinal1",
+      "match": ["1st"],
+      "replace": "1ˢᵗ",
+      "message": "for 1ˢᵗ?"
+    },
+    {
+      "id": "ordinal2",
+      "match": ["2nd"],
+      "replace": "2ⁿᵈ",
+      "message": "for 2ⁿᵈ?"
+    },
+    {
+      "id": "ordinal3",
+      "match": ["3rd"],
+      "replace": "3ʳᵈ",
+      "message": "for 3ʳᵈ?"
+    },
+    {
+      "id": "ordinal4",
+      "match": ["\\d[th]"],
+      "replace": "$1ᵗʰ",
+      "message": "for ᵗʰ, like 4ᵗʰ?"
+    },
+    {
+      "id": "multiplication",
+      "match": ["(\\d)[xX]", "(\\d) [xX]"],
+      "replace": "$1×",
+      "message": "for multiplying in math?"
+    },
+    { "id": "degre",
+      "match": ["(\\d)[oO]", "(\\d) [oO]"],
+      "replace": "$1°", 
+      "message": "for degree mark?" 
+    },
+    {
+      "id": "copyright",
+      "match": ["\\(c\\)","\\(C\\)"],
+      "replace": "©",
+      "message": "for copyright mark?"
+    },
+    {
+      "id": "trademark", 
+      "match": ["\\(tm\\)","\\(TM\\)"],
+      "replace": "™",
+      "message": "for trademark?"
+    },
+    {
+      "id": "registered",
+      "match": ["\\(r\\)","\\(R\\)"],
+      "replace": "®", 
+      "message": "for registered mark?"
+    },
+    {
+      "id": "points-suspension",
+      "match": ["\\.\\.\\.", "\\. \\. \\."],
+      "replace": "…",
+      "message": "for ellipsis character?"
+    },
+    {
+      "id": "not-equal",
+      "match": ["!="],
+      "replace": "≠",
+      "message": "not equal sign(≠)?"
+    },
+    { 
+      "id": "chem-sub", 
+      "match": ["(?:[A-Z][a-z]?|\\)|\\]|\\})\\d+$"],
+      "message": "digits in chemical formulas to subscripts(H₂O)?", 
+      "transform": "digitsToSub" 
+    },
+    { 
+      "id": "chem-charge", 
+      "match": ["\\^?\\d*[\\+\\-]$"],
+      "message": "charge notation to superscript(SO₄²⁻)?", 
+      "transform": "chargeToSuper" 
+    },
+    {
+      "id": "superscript-power",
+      "match": ["\\^\\d+"],
+      "transform": "digitsToSuper",
+      "message": "superscript(2²)?"
+    }
+  ],
+  "choices": [
+    {
+      "id": "tiret",
+      "match": ["-","–","—"],
+      "displayMatch": "-",
+      "choices": [
+        { "label": "for compound words(well-being)?", "replace": "-" },
+        { "label": "for ranges(pages 10–20)?", "replace": "–" },
+        { "label": "for breaks in thought(The book—which I loved—was long)?", "replace": "—" },
+        { "label": "for minus sign(−30°C)?", "replace": "−" }
+      ]
+    },
+    {
+      "id": "prime",
+      "match": ["'"],
+      "displayMatch": "'",
+      "choices": [
+        { "label": "for starting a quote(‘I see.’)?", "replace": "‘" },
+        { "label": "for closing a quote(‘I see.’)?", "replace": "’" },
+        { "label": "for minute or ft(1h30′45″)?", "replace": "′" },
+        { "label": "for omission of letters (don't)?", "replace": "'" },
+        { "label": "for a single quote character in code?", "replace": "'" },
+        { "label": "for a backtick character in code?", "replace": "`"}
+      ]
+    },
+    {
+      "id": "prime2",
+      "match": ["\""],
+      "displayMatch": "\"",
+      "choices": [
+        { "label": "for starting a quote(“I see.”)?", "replace": "“" },
+        { "label": "for closing a quote(“I see.”’)?", "replace": "”" },
+        { "label": "for second or inch(1h30′45″)?", "replace": "″" },
+        { "label": "for a double quote character in code?", "replace": "\"" }
+      ]
+    },
+    {
+      "id": "heart",
+      "match": ["<3"],
+      "displayMatch": "<3",
+      "choices": [
+        { "label": "literally <3?", "replace": "<3" },
+        { "label": "for empty heart?", "replace": "♡" },
+        { "label": "for black heart?", "replace": "♥" }
+      ]
+    },
+    {
+      "id": "double-arrow-right",
+      "match": ["=>"],
+      "displayMatch": "=>",
+      "choices": [
+        { "label": "literally =>", "replace": "=>" },
+        { "label": "for double arrow right?", "replace": "⇒" },
+        { "label": "for greater or equal?", "replace": "≥" }
+      ]
+    },
+    {
+      "id": "double-arrow-left",
+      "match": ["<="],
+      "displayMatch": "<=",
+      "choices": [
+        { "label": "literally <=", "replace": "<=" },
+        { "label": "for double arrow left?", "replace": "⇐" },
+        { "label": "for double arrow?", "replace": "⇔" },
+        { "label": "for less or equal?", "replace": "≤" }
+      ]
+    },
+    {
+      "id": "arrow-right",
+      "match": ["->"],
+      "displayMatch": "->",
+      "choices": [
+        { "label": "literally ->", "replace": "->" },
+        { "label": "for right arrow?", "replace": "→" },
+        { "label": "for greater or equal?", "replace": "≥" }
+      ]
+    },
+    {
+      "id": "arrow-left",
+      "match": ["<-"],
+      "displayMatch": "<-",
+      "choices": [
+        { "label": "literally <-", "replace": "<-" },
+        { "label": "for left arrow?", "replace": "←" },
+        { "label": "for less or equal?", "replace": "≤" }
+      ]
+    },
+    {
+      "id": "double-bar",
+      "match": ["\\|\\|"],
+      "displayMatch": "||",
+      "choices": [
+        { "label": "literally ||?", "replace": "||" },
+        { "label": "for double vertical line?", "replace": "‖" },
+        { "label": "for parallel sign in math?", "replace": "∥" },
+        { "label": "for musical repeat sign(𝄆)?", "replace": "𝄆" },
+        { "label": "for musical repeat sign(𝄇)?", "replace": "𝄇" }
+      ]
+    },
+    {
+      "id": "reference",
+      "match": ["\\*{2,}"],
+      "displayMatch": "**",
+      "choices": [
+        { "label": "literally **?", "replace": "*" },
+        { "label": "for traditional second reference mark(†)?", "replace": "†" },
+        { "label": "for traditional third reference mark(‡)", "replace": "‡" },
+        { "label": "for traditional forth reference mark(§)", "replace": "§" }
+      ]
+    }
+  ]
+}

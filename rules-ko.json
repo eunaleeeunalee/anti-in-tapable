@@ -1,0 +1,234 @@
+{
+  "ui-text": {
+    "title": "Anti-In-tapable — 못 치면 대신 쳐줌기",
+    "subtitle": "여기에 글을 써주세요. 필요한 기호는 제가 제안하고 바꿔 드립니다 :)",
+    "example": "예: 사실 당신은 3x6=18 대신 3×6=18이라고 쓰고싶었죠.",
+    "langChoice": "언어 선택: ",
+    "proposition": "제안: ",
+    "yes": "예",
+    "no": "아니오",
+    "copy": "클립보드에 복사하기",
+    "success": "복사되었습니다!",
+    "clear": "텍스트 모두 지우기", 
+    "learn-more": "더 알아보기",
+    "hint": "이 프로젝트는 일반적으로 쓰이는 키보드의 한계로 잘못 사용되어지는 기호들의 입력을 돕기위해 만들어졌습니다. 이는 사용자가 선택한 언어에 따라 다르게 규칙이 적용됩니다. 작업에서 다루는 기호들은 다음과 같습니다.",
+    "hint-list":[
+      "×", "°", "™", "©", "®", 
+      "- – —", 
+      ". … ·",
+      "' ‘ ’ ′ `", "“ ” ″ \"", 
+      "《 》", "『 』", "« »",
+      "≠", "≤ ≥", 
+      "⇐ ⇒ ⇔", "← →",
+      "‖ ∥ 𝄆 𝄇",
+      "1ˢᵗ 2ⁿᵈ 3ʳᵈ nᵗʰ", 
+      "H₂O 2² SO₄²⁻",
+      "얇은 줄바꿈 방지 공백", 
+      "Œ Æ œ æ",
+      "♡ ♥",
+      "* † ‡ §",
+      "※", 
+      "□"
+     ],
+    "choicePrompt": "아래에서 하나를 선택하세요.",
+    "replacePrompt": "이 구간을 바꿀까요?"
+  },
+  "replacement": [
+   
+    {
+      "id": "multiplication",
+      "match": ["(\\d)[xX]", "(\\d) [xX]"],
+      "replace": "$1×",
+      "message": "곱하기를 표현하고 싶나요?"
+    },
+    { "id": "degre",
+      "match": ["(\\d)[oO]", "(\\d) [oO]"],
+      "replace": "$1°", 
+      "message": "온도나 각도를 표현하고 싶나요??" 
+    },
+    {
+      "id": "copyright",
+      "match": ["\\(c\\)", "\\(C\\)"],
+      "replace": "©",
+      "message": "카피라이트 표시를 하고싶나요??"
+    },
+    {
+      "id": "trademark", 
+      "match": ["\\(tm\\)","\\(TM\\)"],
+      "replace": "™",
+      "message": "트레이드마크 표시를 하고싶나요?"
+    },
+    {
+      "id": "registered",
+      "match": ["\\(r\\)","\\(R\\)"],
+      "replace": "®", 
+      "message": "레지스터 표시를 하고싶나요?"
+    },
+    {
+      "id": "guillemet-ouvrant",
+      "match": ["<<"],
+      "replace": "《",
+      "message": "여는 겹화살괄호(《)를 쓰고싶나요?"
+    },
+    {
+      "id": "guillemet-fermant",
+      "match": [">>"],
+      "replace": "》",
+      "message": "닫는 겹화살괄호(》)를 쓰고싶나요?"
+    },
+    {
+      "id": "not-equal",
+      "match": ["!="],
+      "replace": "≠",
+      "message": "같지 않음을 나타내는 기호(≠)를 쓰고 싶나요?"
+    },
+    {
+      "id": "superscript-power",
+      "match": ["\\^\\d+"],
+      "transform": "digitsToSuper",
+      "message": "위첨자(2²)를 표현할까요?"
+    },
+    { 
+      "id": "chem-sub", 
+      "match": ["(?:[A-Z][a-z]?|\\)|\\]|\\})\\d+$"],
+      "message": "화학식 아래첨자(H₂O)를 쓰고싶나요?", 
+      "transform": "digitsToSub" 
+    },
+    { 
+      "id": "chem-charge", 
+      "match": ["\\^?\\d*[\\+\\-]$"],
+      "message": "위첨자 전하(SO₄²⁻)를 쓰고싶나요?", 
+      "transform": "chargeToSuper" 
+    }
+  ],
+  "choices": [
+    {
+      "id": "tiret",
+      "match": ["-","–","—"],
+      "displayMatch": "-",
+      "choices": [
+        { "label": "순차적 과정(기획-설계-개발)을 나열하고 싶나요?", "replace": "-" },
+        { "label": "기간이나 구간(서울-대전)을 표시하고 싶나요?", "replace": "–" },
+        { "label": "앞에 말을 정정이나 강조하고 싶나요?", "replace": "―――" },
+        { "label": "기간을 표현하고 싶나요?", "replace": "∼" },
+        { "label": "빼기 혹은 음수를 표현하고 싶나요?", "replace": "−" }
+      ]
+    },
+    {
+      "id": "point",
+      "match": [".","…","·"],
+      "displayMatch": "-",
+      "choices": [
+        { "label": "말그대로 .을 쓰고 싶나요?", "replace": "." },
+        { "label": "말줄임표를 쓰고싶나요?", "replace": "…" },
+        { "label": "외국어 이름(존 F·케네디)이나 병렬관계(남녀·노소)를 표시하고 싶나요?", "replace": "·" }
+      ]
+    },
+    {
+      "id": "reference",
+      "match": ["\\*"],
+      "displayMatch": "*",
+      "choices": [
+        { "label": "주의를 알리고 싶나요?", "replace": "※" },
+        { "label": "각주나 별도 설명을 표시하고 싶나요?", "replace": "*" }
+      ]
+    },
+    {
+      "id": "square",
+      "match": ["ㅁ"],
+      "displayMatch": "□",
+      "choices": [
+        { "label": "자음 ㅁ을 단독으로 사용하나요?", "replace": "ㅁ" },
+        { "label": "빠진 글자를 표현하고 싶나요?", "replace": "□" }
+      ]
+    },
+    {
+      "id": "prime1",
+      "match": ["'"],
+      "displayMatch": "'",
+      "choices": [
+        { "label": "속마음이나 강조문구를 시작하나요?", "replace": "‘" },
+        { "label": "속마음이나 강조문구를 마치나요?", "replace": "’" },
+        { "label": "분(시간)이나 각도를 나타내는 prime 기호인가요?", "replace": "′" },
+        { "label": "프로그래밍에서 쓰는 single quote인가요?", "replace": "'" },
+        { "label": "프로그래밍에서 쓰는 백틱인가요?", "replace": "`"}
+      ]
+    },
+    {
+      "id": "prime2",
+      "match": ["\""],
+      "displayMatch": "'",
+      "choices": [
+        { "label": "대화를 시작하나요?", "replace": "“" },
+        { "label": "대화를 마치나요?", "replace": "”" },
+        { "label": "초(sec)나 인치를 표기하고 싶나요?", "replace": "″"},
+        { "label": "인용자료 제목 언급을 시작하나요?", "replace": "『" },
+        { "label": "인용자료 제목 언급을 마치나요?", "replace": "』" },
+        { "label": "프로그래밍에서 쓰는 double quote인가요?", "replace": "\"" }
+      ]
+    },
+    {
+      "id": "heart",
+      "match": ["<3"],
+      "displayMatch": "<3",
+      "choices": [
+        { "label": "말그대로 <3가 필요한가요?", "replace": "<3" },
+        { "label": "빈하트를 표현하고 싶나요?", "replace": "♡" },
+        { "label": "검은 하트를 표현하고 싶나요?", "replace": "♥" }
+      ]
+    },
+    {
+      "id": "double-arrow-right",
+      "match": ["=>"],
+      "displayMatch": "=>",
+      "choices": [
+        { "label": "말 그대로 =>이 필요한가요?", "replace": "=>" },
+        { "label": "오른쪽 이중 화살표 기호를 쓰고 싶나요?", "replace": "⇒" },
+        { "label": "크거나 같다 기호를 쓰고 싶나요?", "replace": "≥" }
+      ]
+    },
+    {
+      "id": "double-arrow-left",
+      "match": ["<="],
+      "displayMatch": "<=",
+      "choices": [
+        { "label": "말그대로 <=이 필요한가요?", "replace": "<=" },
+        { "label": "화살표 기호를 쓰고 싶나요?", "replace": "⇐" },
+        { "label": "양방향 화살표기호를 쓰고 싶나요?", "replace": "⇔" },
+        { "label": "작거나 같다 기호를 쓰고 싶나요?", "replace": "≤" }
+      ]
+    },
+    {
+      "id": "arrow-right",
+      "match": ["->"],
+      "displayMatch": "->",
+      "choices": [
+        { "label": "말 그대로 ->이 필요한가요?", "replace": "->" },
+        { "label": "오른쪽 화살표 기호를 쓰고 싶나요?", "replace": "→" },
+        { "label": "크거나 같다 기호를 쓰고 싶나요?", "replace": "≥" }
+      ]
+    },
+    {
+      "id": "arrow-left",
+      "match": ["<-"],
+      "displayMatch": "<-",
+      "choices": [
+        { "label": "말 그대로 <-이 필요한가요?", "replace": "<-" },
+        { "label": "왼쪽 화살표 기호를 쓰고 싶나요?", "replace": "←" },
+        { "label": "작거나 같다 기호를 쓰고 싶나요?", "replace": "≤" }
+      ]
+    },
+    {
+      "id": "double-bar",
+      "match": ["\\|\\|"],
+      "displayMatch": "||",
+      "choices": [
+        { "label": "말 그대로 ||이 필요한가요?", "replace": "||" },
+        { "label": "이중 세로선 기호로 바꿀까요?", "replace": "‖" },
+        { "label": "수학에서 평행 기호로 바꿀까요?", "replace": "∥" },
+        { "label": "음악 반복 기호(𝄆)를 쓰고 싶나요?", "replace": "𝄆" },
+        { "label": "음악 반복 기호(𝄇)를 쓰고 싶나요?", "replace": "𝄇" }
+      ]
+    }
+  ]
+}
