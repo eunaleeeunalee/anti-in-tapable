@@ -336,12 +336,13 @@ body {
     padding: 18px 20px;
     width: min(560px, 92vw);
     z-index: 0;
+    //background-color: #1d1914;
 
     &::before {
       content: "";
       position: absolute;       // ✅ fixed 말고 absolute
       inset: 0;                 // 패널 경계 안으로 딱 맞춤
-      background-image: url("/assets/paradise.jpg");
+      background-image: url("assets/paradise.jpg");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
