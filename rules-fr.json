@@ -145,7 +145,7 @@
     },
     { 
       "id": "chem-charge", 
-      "match": ["\\^?\\d*[\\+\\-]$"],
+      "match": ["\\^\\d+[\\+\\-]", "\\d+[\\+\\-]"],
       "message": "la notation de charge en exposant (SO₄²⁻)\u202f?", 
       "transform": "chargeToSuper" 
     }

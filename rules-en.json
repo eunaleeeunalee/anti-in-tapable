@@ -106,7 +106,7 @@
     },
     { 
       "id": "chem-charge", 
-      "match": ["\\^?\\d*[\\+\\-]$"],
+      "match": ["\\^\\d+[\\+\\-]", "\\d+[\\+\\-]"],
       "message": "charge notation to superscript(SO₄²⁻)?", 
       "transform": "chargeToSuper" 
     },

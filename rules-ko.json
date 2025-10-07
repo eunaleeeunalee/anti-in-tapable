@@ -96,7 +96,7 @@
     },
     { 
       "id": "chem-charge", 
-      "match": ["\\^?\\d*[\\+\\-]$"],
+      "match": ["\\^\\d+[\\+\\-]", "\\d+[\\+\\-]"],
       "message": "위첨자 전하(SO₄²⁻)를 쓰고싶나요?", 
       "transform": "chargeToSuper" 
     }
@@ -116,8 +116,8 @@
     },
     {
       "id": "point",
-      "match": [".","…","·"],
-      "displayMatch": "-",
+      "match": ["\\\\.","…","·"],
+      "displayMatch": ".",
       "choices": [
         { "label": "말그대로 .을 쓰고 싶나요?", "replace": "." },
         { "label": "말줄임표를 쓰고싶나요?", "replace": "…" },
